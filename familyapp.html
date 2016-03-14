@@ -1,0 +1,31 @@
+<head>
+  <title>familyapp</title>
+</head>
+
+<body>
+  <h1>The Family</h1>
+    {{#each members}}
+      {{> Member}}
+    {{/each}}
+    <form class="new-member">
+      <input type="text" name="text" placeholder="Add someone to the family" />
+    </form>
+    <button class="reset-status">Reset</button>
+</body>
+
+<template name="Member">
+  <div class="member">
+    <div>{{name}}</div>
+    <div>{{status}}</div>
+    <button class="yes-btn">Yes</button>
+    <button class="no-btn">No</button>
+    <button class="maybe-btn">Maybe</button>
+    <button class="change-btn">Maybe</button>
+    <button class="remove">Delete</button>
+  </div>
+</template>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>
