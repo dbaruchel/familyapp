@@ -1,0 +1,176 @@
+@import "{poetic:materialize-scss}/sass/materialize.scss";
+
+body {
+  background: #fff8e1;
+}
+
+.nav-wrapper {
+  background-color:midnightblue;
+  .brand-logo {
+    font-size:1.5rem;
+    font-weight: 200;
+  }
+}
+
+.member {
+  position: relative;
+}
+
+.member.card {
+  transition: background-color 0.3s ease-in;
+}
+
+.card-Yes {
+  background-color:#c8e6c9;
+}
+
+.card-No {
+  background-color:#ffab91;
+}
+
+.card-Maybe {
+  background-color:#ffe082;
+}
+
+.member .card-content {
+  position: relative;
+  .member-name {
+    color:midnightblue;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+
+.edit-btn {
+  position:absolute;
+  right:20px;
+  top:20px;
+  cursor: pointer;
+  &:hover {
+    i {color:blue;}
+  }
+  .edit-dropdown {
+    display: none;
+    position:absolute;
+    top:20px;
+    right:0;
+    border: 1px solid #ccc;
+    padding: 2px 5px;
+    border-radius: 3px;
+    background-color:white;
+    &:hover {
+      background-color:#F6F6F6;
+    }
+  }
+}
+
+.choice-buttons {
+  text-align:center;
+}
+
+.status-and-message {
+  margin:0.75rem 0;
+  .status {
+    text-transform: uppercase;
+    font-size:1.6rem;
+    width:37px;
+    height: 37px;
+    border-radius:50%;
+    color:white;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    i {
+      line-height: 37px;
+    }
+  }
+  .Yes-status {
+    background-color:#4CAF50;
+  }
+  .No-status {
+    background-color:#F44336;
+  }
+  .Maybe-status {
+    background-color:#ff9800;
+  }
+
+  .edit-message-form {
+    display: none;
+    background-color: white;
+    padding: 0 1rem;
+    border-radius: 19px;
+    width: calc(100% - 44px);
+
+    .input-message {
+      height: 37px;
+      line-height: 37px;
+      margin-bottom: 0.5rem;
+    }
+  }
+  .add-message {
+    color:white;
+    display: inline-block;
+    line-height: 37px;
+    padding-left: 0.5rem;
+  }
+  .edit-message {
+    display: inline-block;
+  }
+  .message {
+    background-color:white;
+    padding: 2px 1rem;
+    margin-left: 0.5rem;
+    border-radius:19px;
+    display: inline-block;
+    min-height: 25px;
+    margin-top: 6px;
+    max-width: calc(100% - 44px);
+  }
+}
+
+
+
+
+.new-member {
+  background-color: #F6F6F6;
+  position: relative;
+  border: 1px solid #eee;
+  border-radius: 19px;
+  height: 37px;
+  margin-bottom: 2rem;
+  input.new-member-name {
+    margin: 0;
+    padding: 0 10px;
+    border: none;
+    border-radius: 19px;
+    height: 100%;
+    line-height: 37px;
+    box-sizing:border-box;
+  }
+  input[type=text]:focus {
+    border:none;
+    box-shadow: 0 0 0 0 transparent;    
+    background-color:white;
+  }
+  input.submit-name {
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    width: 37px;
+    height: 37px;
+    border-radius: 19px;
+    border: none;
+    color: white;
+    background: #ddd;
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+  input[type=text]:focus ~ input.submit-name {   
+    background-color:midnightblue;
+  }
+}
+
+
+
+

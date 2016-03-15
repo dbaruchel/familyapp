@@ -1,27 +1,95 @@
 <head>
   <title>familyapp</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="shortcut icon" href="/f-favicon.ico">
 </head>
 
 <body>
-  <h1>The Family</h1>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <div class="brand-logo center">Who's home for dinner ?</div>
+      </div>
+    </nav>
+  </div>
+
+  {{> loginButtons}}
+
+  <div class="container">
     {{#each members}}
       {{> Member}}
     {{/each}}
-    <form class="new-member">
-      <input type="text" name="text" placeholder="Add someone to the family" />
-    </form>
-    <button class="reset-status">Reset</button>
+    {{#if currentUser}}
+      <form class="new-member">
+        <input class="new-member-name" type="text" name="text" placeholder="+ Add someone" required>
+        <input class="submit-name" type="submit" value="+">
+      </form>
+    {{/if}}
+  </div>
 </body>
 
 <template name="Member">
-  <div class="member">
-    <div>{{name}}</div>
-    <div>{{status}}</div>
-    <button class="yes-btn">Yes</button>
-    <button class="no-btn">No</button>
-    <button class="maybe-btn">Maybe</button>
-    <button class="change-btn">Maybe</button>
-    <button class="remove">Delete</button>
+  <div class="member card card-{{status}}">
+    <div class="card-content">
+      {{#if $eq owner currentUserId}}
+        <div class='edit-btn'>
+          <i class="material-icons tiny">clear</i>
+          <div class='edit-dropdown'>
+            <div class="remove">Remove</div>
+          </div>
+        </div>
+      {{/if}}
+
+      <span class="member-name card-title">{{name}}</span>
+      {{#if $neq status '-'}}
+        <div class="status-and-message">
+          <div class="{{status}}-status status">
+            {{#if $eq status 'Maybe'}} ?
+            {{else}}
+              <i class="material-icons">
+                {{#if $eq status 'Yes'}} done
+                {{else}} clear {{/if}}
+              </i>
+            {{/if}}          
+          </div>
+          {{#if $eq message ''}}
+            {{#if $eq owner currentUserId}}
+              <div class="add-message edit-message">Add a message</div>
+            {{/if}}
+          {{else}}
+            <div class="message">{{message}}</div>
+            {{#if $eq owner currentUserId}}
+              <div class="edit-message">
+                <i class="material-icons tiny">mode_edit</i>
+              </div>
+            {{/if}}
+          {{/if}}
+          <form class="edit-message-form"> 
+            <input class="input-message" type="text" name="message" placeholder="Write a message" />
+            <div class="cancel-edit left">Cancel</div>
+            <input class="right" type="submit">
+          </form>
+        </div>
+      {{/if}}
+
+      {{#if $eq status '-'}}
+        {{#if $eq owner currentUserId}}
+          <div class="choice-buttons">
+            <button class="yes-btn btn-floating green waves-effect">
+              <i class="large material-icons">done</i>
+            </button>
+            <button class="no-btn btn-floating red waves-effect">
+              <i class="large material-icons">clear</i>
+            </button>
+            <button class="maybe-btn btn-floating orange waves-effect">?</button>
+          </div>
+        {{else}}
+          <div class="not-answered">Not answered yet</div>
+        {{/if}}
+      {{/if}}
+    </div>
   </div>
 </template>
 

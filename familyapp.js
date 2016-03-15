@@ -1,27 +1,15 @@
 Members = new Mongo.Collection("members");
 
 if (Meteor.isClient) {
-  // counter starts at 0
-  // Session.setDefault('counter', 0);
 
-  // Template.hello.helpers({
-  //   counter: function () {
-  //     return Session.get('counter');
-  //   }
-  // });
-
-  // Template.hello.events({
-  //   'click button': function () {
-  //     // increment the counter when button is clicked
-  //     Session.set('counter', Session.get('counter') + 1);
-  //   }
-  // });
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
 
   Template.body.helpers({
     'members': function() {
       return Members.find({});
-    }
-    
+    },
   });
 
   Template.body.events({
@@ -36,17 +24,21 @@ if (Meteor.isClient) {
       Members.insert({
         name: text,
         status:'-',
-        createdAt: new Date() // current time
+        message:'',
+        createdAt: new Date(), // current time
+        owner: Meteor.userId(),
+        username: Meteor.user().username,
       });
  
       // Clear form
       event.target.text.value = "";
     },
+  });
 
-    'click reset-status': function () {
-      Members.update({
-        $set: {status: "-"}
-      });
+  Template.Member.helpers({
+    'currentUserId': function() {
+      console.log(Meteor.userId());
+      return Meteor.userId();
     },
   });
 
@@ -69,15 +61,50 @@ if (Meteor.isClient) {
       });
     },
 
-    'click .change-btn': function () {
-      Members.update(this._id, {
-        $set: {status: "-"}
-      });
+    'click .status': function () {
+      if (Meteor.userId() == this.owner){
+        Members.update(this._id, {
+          $set: {status: "-"}
+        });
+      }
+    },
+
+    'click .edit-btn': function (e, t) {
+      t.$('.edit-dropdown').toggle();
     },
 
     'click .remove': function () {
       Members.remove(this._id);
-    }
+    },
+
+    'click .edit-message': function(e,t) {
+      t.$('.edit-message').css('display', 'none');
+      t.$('.message').css('display', 'none');
+      t.$('.edit-message-form').css('display', 'inline-block');
+    },
+
+    'click .cancel-edit': function(e,t) {
+      t.$('.edit-message-form').css('display', 'none');
+      t.$('.edit-message').css('display', 'inline-block');
+      t.$('.message').css('display', 'inline-block');
+    },
+
+    'submit .edit-message-form': function (event, t) {
+      // Prevent default browser form submit
+      event.preventDefault();
+    
+      // Get value from form element
+      var text = event.target.message.value;
+    
+      // Update message
+      Members.update(this._id, {
+        $set: {message: text}
+      });
+
+      t.$('.edit-message-form').css('display', 'none');
+      t.$('.edit-message').css('display', 'inline-block');
+      t.$('.message').css('display', 'inline-block');
+    },
   });
 }
 
