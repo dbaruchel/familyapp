@@ -2,6 +2,7 @@
   <title>familyapp</title>
   <meta charset="utf-8">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+  <meta name="apple-mobile-web-app-title" content="Family">
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <link rel="shortcut icon" href="/f-favicon.ico">
   <link rel="apple-touch-icon" href="familyapp-icon.png" />
@@ -31,34 +32,44 @@
     </nav>
   </div>
 
-  {{> loginButtons}}
-
   <div class="container">
-    {{#each members}}
-      {{> Member}}
-    {{/each}}
+    {{> loginButtons}}
     {{#if currentUser}}
-      <form class="new-member">
+      {{#each answers}}
+        {{> Answer}}
+      {{/each}}
+      <div class="fixed-action-btn new-answer-btn">
+        <div class="btn-floating red">
+          <i class="large material-icons">add</i>
+        </div>
+      </div>
+      <div class="me-or-guest">
+        <div class="add-me">Me</div>
+<!--         <div class="add-guest">Guest</div> -->
+      </div>
+
+<!--       <form class="new-member">
         <input class="new-member-name" type="text" name="text" placeholder="+ Add someone" required>
         <input class="submit-name" type="submit" value="+">
-      </form>
+      </form> -->
     {{/if}}
   </div>
+  
 </body>
 
-<template name="Member">
-  <div class="member card card-{{status}}">
+<template name="Answer">
+  <div class="answer card card-{{status}}">
     <div class="card-content">
-<!--       {{#if $eq owner currentUserId}} -->
+      {{#if $eq owner currentUserId}}
         <div class='edit-btn'>
           <i class="material-icons tiny">clear</i>
           <div class='edit-dropdown'>
             <div class="remove">Remove</div>
           </div>
         </div>
-<!--       {{/if}} -->
+      {{/if}}
 
-      <span class="member-name card-title">{{name}}</span>
+      <span class="answer-name card-title">{{name}}</span>
       {{#if $neq status '-'}}
         <div class="status-and-message">
           <div class="{{status}}-status status">
@@ -107,9 +118,4 @@
       {{/if}}
     </div>
   </div>
-</template>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
 </template>

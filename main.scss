@@ -8,15 +8,19 @@ body {
   background-color:midnightblue;
   .brand-logo {
     font-size:1.5rem;
-    font-weight: 200;
+    font-weight: 300;
   }
 }
 
-.member {
+#loggin-buttons {
+  margin-top: 1rem;
+}
+
+.answer {
   position: relative;
 }
 
-.member.card {
+.answer.card {
   transition: background-color 0.3s ease-in;
 }
 
@@ -32,12 +36,32 @@ body {
   background-color:#ffe082;
 }
 
-.member .card-content {
+.answer .card-content {
   position: relative;
-  .member-name {
+  .answer-name {
     color:midnightblue;
     font-weight: 400;
     line-height: normal;
+  }
+}
+
+.new-answer-btn {
+  bottom: 45px;
+  right: 24px;
+}
+
+.me-or-guest {
+  display: none;
+  position:fixed;
+  bottom: 45px;
+  right: 70px;
+  .add-me {
+    background-color:rgba(0,0,0,0.5);
+    color:white;
+    padding:0.5rem 1rem;
+    border-radius:1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
   }
 }
 
