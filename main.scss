@@ -52,9 +52,7 @@ body {
 
 .me-or-guest {
   display: none;
-  position:fixed;
-  bottom: 45px;
-  right: 70px;
+
   .add-me {
     background-color:rgba(0,0,0,0.5);
     color:white;
@@ -62,6 +60,7 @@ body {
     border-radius:1rem;
     font-size: 1.2rem;
     cursor: pointer;
+    width: 50px;
   }
 }
 
